@@ -9,5 +9,6 @@ public interface ItemMenu {
 	public String getEnlace();
 	public boolean tieneHijos();
 	public List<? extends ItemMenu> getHijos();
-	
+
+	String getSlung();
 }

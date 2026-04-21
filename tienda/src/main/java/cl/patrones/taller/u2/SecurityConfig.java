@@ -15,19 +15,19 @@ import cl.patrones.taller.u2.tienda.adapter.UsuarioAnonimo;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Bean
-    SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+	@Bean
+	SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity
-			.authorizeHttpRequests(authz -> authz.anyRequest().permitAll() )
-			.formLogin(form -> form.loginPage("/ingresar").loginProcessingUrl("/ingresar").permitAll())
-			.logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET")).permitAll())
-			//.anonymous(anonymous -> anonymous.principal( new UsuarioAnonimo() ))			
-		;
+				.authorizeHttpRequests(authz -> authz.anyRequest().permitAll())
+				.formLogin(form -> form.loginPage("/ingresar").loginProcessingUrl("/ingresar").permitAll())
+				.logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET")).permitAll())
+				.anonymous(anonymous -> anonymous.principal(new UsuarioAnonimo()));
+
 		return httpSecurity.build();
 	}
 
-    @Bean
-    PasswordEncoder passwordEncoder() {
-    	return new BCryptPasswordEncoder();
-    }
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 }
